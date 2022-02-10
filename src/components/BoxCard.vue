@@ -1,9 +1,9 @@
 <template>
-  <section class="box-card d-flex justify-content-center flex-wrap my-5">
+  <section class="box-card d-flex justify-content-center flex-wrap my-3">
     <div
       v-for="(album, index) in albums"
       :key="index"
-      class="album-card text-center m-4"
+      class="album-card col-6 col-md-3 col-lg-2 text-center p-2"
     >
       <figure>
         <img class="img-fluid p-3" :src="album.poster" :alt="album.title" />
@@ -39,17 +39,17 @@ export default {
 
 <style lang="scss" scoped>
 .album-card {
-  width: calc(100% / 7);
   background-color: #2e3a46;
-  
+  margin: 20px;
+
   h5 {
     color: white;
   }
 
-  span, 
-  date{
-    color: #6E777D;  
-    font-weight: bold ;  
+  span,
+  date {
+    color: #6e777d;
+    font-weight: bold;
   }
 }
 </style>
