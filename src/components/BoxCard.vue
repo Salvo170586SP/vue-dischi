@@ -12,7 +12,7 @@
 
       <span>{{ album.author }}</span
       ><br />
-      <date>{{ album.year }}</date>
+      <data>{{ album.year }}</data>
     </div>
   </section>
 </template>
@@ -48,7 +48,7 @@ export default {
   }
 
   span,
-  date {
+  data {
     color: #6e777d;
     font-weight: bold;
   }
