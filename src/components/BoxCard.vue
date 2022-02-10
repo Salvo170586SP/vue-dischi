@@ -1,7 +1,18 @@
 <template>
-  <section class="box-card d-flex justify-content-center align-items-center flex-wrap my-5">
-    <div v-for="(album, index) in albums" :key="index" class="album-card py-5 m-4">
-        <img class="img-fluid p-3" :src="album.poster" alt="">
+  <section class="box-card d-flex justify-content-center flex-wrap my-5">
+    <div
+      v-for="(album, index) in albums"
+      :key="index"
+      class="album-card text-center m-4"
+    >
+      <figure>
+        <img class="img-fluid p-3" :src="album.poster" :alt="album.title" />
+      </figure>
+      <h5>{{ album.title }}</h5>
+
+      <span>{{ album.author }}</span
+      ><br />
+      <date>{{ album.year }}</date>
     </div>
   </section>
 </template>
@@ -27,13 +38,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.album-card{
-/*     width: calc(100% / 5);
- */    height: 350px;
-    background-color: #2E3A46;
-
-    img{
-        width: 170px;
-    }
+.album-card {
+  width: calc(100% / 7);
+  background-color: #2e3a46;
+  h5 {
+    color: white;
+  }
 }
 </style>
