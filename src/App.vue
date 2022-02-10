@@ -24,4 +24,8 @@ export default {
 <style lang="scss">
 @import './assets/sass/style.scss';
 
+main{
+  position: relative;
+}
+
 </style>
