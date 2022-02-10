@@ -1,9 +1,9 @@
 <template>
   <section class="box-card d-flex justify-content-center flex-wrap my-3">
-    <div
+    <div 
       v-for="(album, index) in albums"
       :key="index"
-      class="album-card col-6 col-md-3 col-lg-2 text-center p-2"
+      class="album-card col-6 col-md-3 col-lg-2 text-center shadow p-2"
     >
       <figure>
         <img class="img-fluid p-3" :src="album.poster" :alt="album.title" />
@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       albums: [],
+      
     };
   },
   mounted() {
