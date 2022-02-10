@@ -41,8 +41,15 @@ export default {
 .album-card {
   width: calc(100% / 7);
   background-color: #2e3a46;
+  
   h5 {
     color: white;
+  }
+
+  span, 
+  date{
+    color: #6E777D;  
+    font-weight: bold ;  
   }
 }
 </style>
