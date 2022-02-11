@@ -10,7 +10,7 @@
       </figure>
       <div>
         <label class="text-white mx-2" for="gender">Scegli il tuo genere preferito</label>
-        <select v-model="selectedGender" name="gender" id="gender">
+        <select  name="gender" id="gender">
           <option  value="">--</option>
           <option  value="Rock">Rock</option>
           <option  value="Pop">Pop</option>
@@ -25,11 +25,7 @@
 <script>
 export default {
   name: "Header",
-  data(){
-    return{
-      selectedGender: '',
-    }
-  }
+
 };
 </script>
 
