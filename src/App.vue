@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-   <Header />
+   <Header @selectded="mioMetodo" />
     <main class="container">
       <BoxCard />
     </main>
@@ -17,6 +17,12 @@ export default {
     Header,
     BoxCard,
   },
+  methods: {
+    mioMetodo(){
+      console.log('ho selezionato');
+    }
+    
+  }
  
 }
 </script>
