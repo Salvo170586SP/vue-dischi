@@ -10,12 +10,8 @@
       </figure>
       <div>
         <label class="text-white mx-2" for="gender">Scegli il tuo genere preferito</label>
-        <select  name="gender" id="gender">
-          <option  value="">--</option>
-          <option  value="Rock">Rock</option>
-          <option  value="Pop">Pop</option>
-          <option  value="Jazz">Jazz</option>
-          <option  value="Metal">Metal</option>
+        <select v-model="selectGenre" name="gender" id="gender">
+          <option  :value="album.genre">{{ album.genre }}</option>        
         </select>
       </div>
     </div>
@@ -25,7 +21,12 @@
 <script>
 export default {
   name: "Header",
-
+  props: ['gender'],
+  data(){
+    return{
+      selectGenre: '',
+    }
+  }
 };
 </script>
 

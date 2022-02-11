@@ -8,7 +8,7 @@
       :key="index"
       class="album-card col-6 col-md-3 col-lg-2 text-center shadow p-2"> 
 
-        <BoxCard :image="album.poster" :title="album.title" :author="album.author" :year="album.year" />
+        <BoxCard :album="album" :image="album.poster" :title="album.title" :author="album.author" :year="album.year" />
       </div>
     </main>
   </div>
@@ -34,15 +34,18 @@ export default {
     };
   },
 
-  mounted() {
-    this.isLoading = true;
-    axios
-      .get("https://flynn.boolean.careers/exercises/api/array/music")
+  methods:{
+    getAlbums(url){
+      axios
+      .get(url)
       .then((res) => {
         this.albums = res.data.response;
-        this.isLoading = false;
-      });
+      }); 
+    }
   },
+  mounted(){
+    this.getAlbums("https://flynn.boolean.careers/exercises/api/array/music")
+  }
 };
 </script>
 
