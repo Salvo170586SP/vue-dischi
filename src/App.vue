@@ -1,13 +1,21 @@
 <template>
   <div id="app">
+    <Header @genere="setGenere" />
 
-    <Header @genere="setGenere" :genere="setGenere"/>
-
-    <main class="container box-card d-flex justify-content-center flex-wrap my-3">
-      <div  v-for="(album, index) in albums"
-      :key="index"
-      class="album-card col-6 col-md-3 col-lg-2 text-center shadow p-2"> 
-        <BoxCard :image="album.poster" :title="album.title" :author="album.author" :year="album.year" />
+    <main
+      class="container box-card d-flex justify-content-center flex-wrap my-3"
+    >
+      <div
+        v-for="(album, index) in filteredGender"
+        :key="index"
+        class="album-card col-6 col-md-3 col-lg-2 text-center shadow p-2"
+      >
+        <BoxCard
+          :image="album.poster"
+          :title="album.title"
+          :author="album.author"
+          :year="album.year"
+        />
       </div>
     </main>
   </div>
@@ -30,28 +38,35 @@ export default {
   data() {
     return {
       albums: [],
-      genere: '',
+      genere: "",
     };
   },
 
-  methods:{
-    getAlbums(url){
-      axios
-      .get(url)
-      .then((res) => {
-        this.albums = res.data.response;
-      }); 
-    },
-    setGenere(value){
-      this.genere = value;
+  computed:{
+    filteredGender(){
+      return this.albums.filter((album)=>{
+        return album.genre.includes(this.genere);
+      })
     }
-
-  
-
   },
-  mounted(){
-    this.getAlbums("https://flynn.boolean.careers/exercises/api/array/music")
-  }
+
+  methods: {
+
+    getAlbums(url) {
+      axios.get(url).then((res) => {
+        this.albums = res.data.response;
+        const { genre } = this.albums;
+        this.genereAlbum = genre;
+      })
+    },
+
+    setGenere(value) {
+       this.genere = value;
+     },
+  },
+  mounted() {
+    this.getAlbums("https://flynn.boolean.careers/exercises/api/array/music");
+  },
 };
 </script>
 
