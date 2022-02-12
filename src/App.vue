@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header @genere="setGenere" />
+    <Header @genere="setGenere" :genere="filteredGender"  />     
 
     <main
       class="container box-card d-flex justify-content-center flex-wrap my-3"
@@ -42,27 +42,24 @@ export default {
     };
   },
 
-  computed:{
-    filteredGender(){
-      return this.albums.filter((album)=>{
+  computed: {
+    filteredGender() {
+      return this.albums.filter((album) => {
         return album.genre.includes(this.genere);
-      })
-    }
+      });
+    },
   },
 
   methods: {
-
     getAlbums(url) {
       axios.get(url).then((res) => {
         this.albums = res.data.response;
-        const { genre } = this.albums;
-        this.genereAlbum = genre;
-      })
+      });
     },
 
     setGenere(value) {
-       this.genere = value;
-     },
+      this.genere = value;
+    },
   },
   mounted() {
     this.getAlbums("https://flynn.boolean.careers/exercises/api/array/music");
