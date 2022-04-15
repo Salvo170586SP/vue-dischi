@@ -1,23 +1,36 @@
 <template>
-  <div>
-    <figure>
-      <img class="img-fluid p-3" :src="image" :alt="title" />
-    </figure>
-    <h5>{{ title }}</h5>
+  <section class="d-flex flex-wrap">
+    <div v-for="(album, index) in filteredAlbumsByGenre" :key="index" class="my-3
+      shadow
+      p-2
+      album-card
+      text-center">
+      <figure>
+        <img class="img-fluid p-3" :src="album.poster" :alt="album.title" />
+      </figure>
+      <h5>{{ album.title }}</h5>
 
-    <span>{{ author }}</span
-    ><br />
-    <data>{{ year }}</data>
-  </div>
+      <span>{{ album.author }}</span
+      ><br />
+      <data>{{ album.year }}</data>
+    </div>
+  </section>
 </template>
-
-
-
 
 <script>
 export default {
   name: "BoxCard",
-  props: ["image", "title", "author", "year"],
+  props: ['albums','filterGenre'],
+
+  computed: {
+    filteredAlbumsByGenre() {
+      const filter = this.filterGenre;
+      return this.albums.filter((album) => {
+        if (album.genre == filter ||  filter == "")
+          return true;
+      });
+    },
+  },
 };
 </script>
 
@@ -25,13 +38,19 @@ export default {
 
 
 <style lang="scss" scoped>
-h5 {
-  color: white;
-}
+.album-card {
+  width: 15% ;
+  background-color: #2e3a46;
+  margin: 20px;
 
-span,
-data {
-  color: #6e777d;
-  font-weight: bold;
+  h5 {
+    color: white;
+  }
+
+  span,
+  data {
+    color: #6e777d;
+    font-weight: bold;
+  }
 }
 </style>

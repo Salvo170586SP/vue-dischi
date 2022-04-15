@@ -8,20 +8,11 @@
           alt="Spotify Logo"
         />
       </figure>
-      <div>
-        <label class="text-white mx-2" for="gender"
-          >Scegli il tuo genere preferito</label
-        >
-        <select
-          
-          v-model="selectGenre"
-          @change="selectAlbum"
-          name="gender"
-          id="gender"
-        >
-        <option v-for="(option, index) in genere" :key="index" :value="option.genre">{{option.genre}}</option>
-        </select>
-      </div>
+      <select name="genre" id="genre" v-model="search" @change="$emit('filter-genre', search)"
+>
+        <option value="">All</option>
+        <option v-for="(album, index) in filteredGenre" :key="index"> {{ album }}</option>
+      </select>
     </div>
   </header>
 </template>
@@ -29,16 +20,19 @@
 <script>
 export default {
   name: "Header",
-  props:["genere"],
-
-  data() {
+  props: ['albums'],
+  data(){
     return {
-      selectGenre: "",
-    };
-  },
-  methods: {
-    selectAlbum() {
-      this.$emit("genere", this.selectGenre);
+      search: '',
+    }
+  }, 
+  computed: {
+    filteredGenre() {
+      const genres = [];
+      this.albums.forEach((album) => {
+        if (!genres.includes(album.genre)) genres.push(album.genre);
+      });
+      return genres;
     },
   },
 };

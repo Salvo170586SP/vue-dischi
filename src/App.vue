@@ -1,22 +1,9 @@
 <template>
   <div id="app">
-    <Header @genere="setGenere" :genere="filteredGender"  />     
+    <Header :albums="albums" @filter-genre="testFilter" />
 
-    <main
-      class="container box-card d-flex justify-content-center flex-wrap my-3"
-    >
-      <div
-        v-for="(album, index) in filteredGender"
-        :key="index"
-        class="album-card col-6 col-md-3 col-lg-2 text-center shadow p-2"
-      >
-        <BoxCard
-          :image="album.poster"
-          :title="album.title"
-          :author="album.author"
-          :year="album.year"
-        />
-      </div>
+    <main class="container box-card">
+      <BoxCard :albums="albums" :filter-genre="filterChange" />
     </main>
   </div>
 </template>
@@ -34,51 +21,35 @@ export default {
     Header,
     BoxCard,
   },
-
   data() {
     return {
       albums: [],
-      genere: "",
+      filterChange: "",
     };
   },
-
-  computed: {
-    filteredGender() {
-      return this.albums.filter((album) => {
-        return album.genre.includes(this.genere);
-      });
-    },
-  },
-
   methods: {
-    getAlbums(url) {
-      axios.get(url).then((res) => {
-        this.albums = res.data.response;
-      });
+    getAlbums() {
+      axios
+        .get("https://flynn.boolean.careers/exercises/api/array/music")
+        .then((res) => {
+          this.albums = res.data.response;
+          console.log(this.albums);
+        });
     },
-
-    setGenere(value) {
-      this.genere = value;
+    testFilter(key) {
+      this.filterChange = key;
     },
   },
   mounted() {
-    this.getAlbums("https://flynn.boolean.careers/exercises/api/array/music");
+    this.getAlbums();
   },
 };
 </script>
-
-
-
 
 <style lang="scss">
 @import "./assets/sass/style.scss";
 
 main {
   position: relative;
-}
-
-.album-card {
-  background-color: #2e3a46;
-  margin: 20px;
 }
 </style>
